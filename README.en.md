@@ -15,7 +15,7 @@ https://dl.example.com/<password>/https://video.twimg.com/ext_tw_video/.../video
 2. In Reach, Admin → 系统设置 → 视频反代 → 外部代理, enter `https://dl.example.com/<password>`. Reach requests `<base>/<raw video URL>` and probes `<base>/healthz` (both `/<password>/healthz` and `/healthz` skip auth).
 3. Tick "启用故障转移" so playback goes through Reach's own `/api/proxy-video` and the proxy address never reaches visitors' pages.
 
-**Why it exists.** googlevideo direct links are bound to the egress IP that extracted them. Run the [reach-upstream](https://github.com/fujioky/reach-upstream) fetcher and this download proxy on the same host and Reach (on Vercel) can pull streams only that IP is allowed to fetch. Upstreams require `Range` requests; the proxy forwards request headers and 206 responses untouched, which is what streaming playback and chunked re-hosting need.
+Upstreams require `Range` requests; the proxy forwards request headers and 206 responses untouched, which is what streaming playback and chunked re-hosting need.
 
 ## How it works
 

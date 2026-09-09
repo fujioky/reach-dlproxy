@@ -15,7 +15,7 @@ https://dl.example.com/<口令>/https://video.twimg.com/ext_tw_video/.../video.m
 2. Reach 后台 → 系统设置 → 视频反代 → 外部代理，填 `https://dl.example.com/<口令>`。Reach 会按 `<代理地址>/<原始视频 URL>` 拼接请求，并用 `<代理地址>/healthz` 做健康探测（本代理的 `/<口令>/healthz` 与 `/healthz` 都免认证）。
 3. 勾选「启用故障转移」，播放请求就会经 Reach 自己的 `/api/proxy-video` 转发，代理地址不会出现在访客页面里。
 
-**为什么需要它。** googlevideo 直链绑定提取时的出口 IP；在同一台机器上跑 [reach-upstream](https://github.com/fujioky/reach-upstream) 的抓取代理和这个下载代理，Reach（部署在 Vercel）就能拿到只有那个 IP 才能取的流。上游要求 `Range` 请求，本代理原样透传请求头与 206 响应，适合流式播放和分块转存。
+上游要求 `Range` 请求，本代理原样透传请求头与 206 响应，适合流式播放和分块转存。
 
 ## 工作方式
 
